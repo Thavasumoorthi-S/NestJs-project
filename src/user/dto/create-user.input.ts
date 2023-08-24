@@ -4,4 +4,9 @@ import { Field, InputType } from '@nestjs/graphql';
 export class CreateUserInputs {
   @Field()
   fullname: string;
+
+  
+  @Field()
+  phonenumber:string
+
 }

@@ -14,8 +14,19 @@ export class UserResolver {
     return this.userService.createUser(createUserInputs);
   }
 
-  @Query(() => User)
-  public async getUserById(@Args('id') id: string) {
-    return this.userService.getUserById(id);
+  @Mutation(()=>String)
+  public async deleteuser(@Args('userid') userid:string)
+  {
+      return this.userService.deleteuser(userid)
   }
+
+
+  @Query(()=>[User])
+  public async getalluser()
+  {
+    return this.userService.getalluser()
+  }
+
+
+  
 }

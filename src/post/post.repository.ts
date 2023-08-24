@@ -3,6 +3,7 @@ import { BaseRepository } from 'src/database/base.respoitory';
 import { DataSource } from 'typeorm';
 import { CreatePostInput } from './dto/create-post.input';
 import { Post } from './entities/post.entity';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class PostRepository extends BaseRepository<Post> {
@@ -10,10 +11,31 @@ export class PostRepository extends BaseRepository<Post> {
     super(Post, dataSource.createEntityManager());
   }
 
-  async createPost(createPostInput: CreatePostInput) {
+
+  public async createPost(userid:string,createPostInput: CreatePostInput) {
     return this.save({
-      name: createPostInput.postName,
-      userId: createPostInput.userId,
+      postname: createPostInput.postName,
+      userId: userid,
+      postorder:createPostInput.postorder
     });
+  }
+   
+  public async getallpost()
+  {
+    return this.find()
+  }
+   
+  public async deletepostbyid(postid:string)
+  {
+    try{
+      const post=await this.findOneBy({postid})
+       await this.softDelete(postid)
+       return "Post deleted successfully"
+
+    }
+    catch(e)
+    {
+      throw new NotFoundException(`post id is not found`);
+    }
   }
 }

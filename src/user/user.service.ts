@@ -10,12 +10,14 @@ export class UserService {
     return this.userRepo.createUser(createUserInputs);
   }
 
-  public async getUserById(id) {
-    // select * from users left join post on user.user_id = post.user_id where users.user_id = ''
-    return this.userRepo
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.post', 'p')
-      .where('user.id =:id', { id })
-      .getOne();
-  }
+public async getalluser()
+{
+  return this.userRepo.getalluser()
+}
+
+public async deleteuser(userid:string)
+{
+  return this.userRepo.deleteuser(userid)
+}
+
 }

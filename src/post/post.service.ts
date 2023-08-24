@@ -6,7 +6,20 @@ import { PostRepository } from './post.repository';
 @Injectable()
 export class PostService {
   constructor(private readonly postRepo: PostRepository) {}
-  create(createPostInput: CreatePostInput) {
-    return this.postRepo.createPost(createPostInput);
+
+ public async create(userid: string,createPostInput: CreatePostInput) {
+    return this.postRepo.createPost(userid,createPostInput);
   }
+  
+  public async getallpost()
+  {
+    return this.postRepo.getallpost()
+  }
+
+
+  public async deletepostbyid(postid:string)
+  {
+    return this.postRepo.deletepostbyid(postid)
+  }
+
 }

@@ -6,5 +6,7 @@ export class CreatePostInput {
   postName: string;
 
   @Field()
-  userId: string;
+  postorder:string
+
+  
 }
